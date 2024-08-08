@@ -51,6 +51,8 @@ class Payload implements \JsonSerializable
     const PAYLOAD_HTTP2_REGULAR_NOTIFICATION_MAXIMUM_SIZE = 4096;
     const PAYLOAD_HTTP2_VOIP_NOTIFICATION_MAXIMUM_SIZE = 5120;
     const PAYLOAD_BINARY_REGULAR_NOTIFICATION_MAXIMUM_SIZE = 2048;
+    const PAYLOAD_ATTRIBUTES_TYPE = 'attributes-type';
+    const PAYLOAD_ATTRIBUTES = 'attributes';
 
 
     /**
@@ -160,6 +162,20 @@ class Payload implements \JsonSerializable
      * @var string
      */
     private $event;
+
+    /**
+     * Attributes Type
+     *
+     * @var string
+     */
+    private $attributesType;
+
+    /**
+     * attributes
+     *
+     * @var array
+     */
+    private $attributes;
 
 
     /**
@@ -596,6 +612,50 @@ class Payload implements \JsonSerializable
     }
 
     /**
+     * Set attributes type for Payload.
+     *
+     * @param string $attributesType
+     * @return Payload
+     */
+    public function setAttributesType($attributesType)
+    {
+        $this->attributesType = $attributesType;
+        return $this;
+    }
+
+    /**
+     * Get attributesType for Payload.
+     *
+     * @return string
+     */
+    public function getAttributesType()
+    {
+        return $this->attributesType;
+    }
+
+    /**
+     * Set attributes for Payload.
+     *
+     * @param array $attributes
+     * @return Payload
+     */
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+        return $this;
+    }
+
+    /**
+     * Get attributes for Payload.
+     *
+     * @return array
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
      * Convert Payload to JSON.
      *
      * @return string
@@ -686,6 +746,14 @@ class Payload implements \JsonSerializable
 
         if (is_double($this->relevanceScore)) {
             $payload[self::PAYLOAD_ROOT_KEY]->{self::PAYLOAD_RELEVANCE_SCORE_KEY} = $this->relevanceScore;
+        }
+
+        if (is_string($this->attributesType)) {
+            $payload[self::PAYLOAD_ROOT_KEY]->{self::PAYLOAD_ATTRIBUTES_TYPE} = $this->attributesType;
+        }
+
+        if (is_array($this->attributes)) {
+            $payload[self::PAYLOAD_ROOT_KEY]->{self::PAYLOAD_ATTRIBUTES} = $this->attributes;
         }
 
         return $payload;
