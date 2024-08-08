@@ -1,5 +1,5 @@
 {
-    "name": "packchat/pushok",
+    "name": "edamov/pushok",
     "type": "library",
     "description": "PHP client for Apple Push Notification Service (APNs) - Send push notifications to iOS using the new APNs HTTP/2 protocol with token-based (JWT with p8 private key) or certificate-based authentication",
     "keywords": [
@@ -43,6 +43,11 @@
     "autoload-dev": {
         "psr-4": {
             "edamov\\pushok\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.16.0"
         }
     },
     "minimum-stability": "dev",
